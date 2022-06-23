@@ -12,16 +12,22 @@
 ##### List of time suffixes:
 - minutes, hours, days, weeks, months, years 'ago..'
 
-**Installation**
+## Installation
  _To install this utility, you need to install the following dependencies:_
 
 `npm i showtimeago` or `npm install showtimeago`
 
+___
+## Usage
+
 **Import**
 
-`import { showTimeAgo } from 'show-time-ago';`
+- ES6: `import showTimeAgo from 'showtimeago'`
+- commonJS: `const showTimeAgo = require('showtimeago')`
 
-examples of usage: 
+_currently not available via cdn_
+
+ex:
 ```
 //vanilla javascript
 showTimeAgo("2022-06-20T13:42:29-05:00")
@@ -32,9 +38,9 @@ showTimeAgo("2022-06-20T13:42:29-05:00")
 console.log(showTimeAgo("2022-06-20T13:42:29-05:00"))
 ```
 
-this utility only takes in a ISO date, for example: 
+This utility only takes in a ISO date, for example: 
 `new Date().toISOString()` 
-outputs: 2022-06-20T13:42:29-05:00 _ISO date format_
+outputs: `2022-06-20T13:42:29-05:00` _ISO date format_
 
 #### Contributing
 ***
