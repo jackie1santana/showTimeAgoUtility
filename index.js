@@ -1,4 +1,4 @@
-function showtimeago() {
+function showtimeago(date) {
     const MONTH_NAMES = [
         'January',
         'February',
@@ -127,3 +127,5 @@ function showtimeago() {
 
     return timeAgo(date);
 };
+
+module.exports = showtimeago;
