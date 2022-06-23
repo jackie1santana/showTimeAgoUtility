@@ -1,4 +1,4 @@
-export const showTimeAgo = () => {
+function showtimeago() {
     const MONTH_NAMES = [
         'January',
         'February',

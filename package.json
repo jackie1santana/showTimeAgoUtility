@@ -1,0 +1,22 @@
+{
+  "name": "showtimeago",
+  "version": "1.0.0",
+  "description": "Show Time Ago is a utility that allows you to see how long ago a date was.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackie1santana/showTimeAgoUtility.git"
+  },
+  "keywords": [
+    "showTimeAgo"
+  ],
+  "author": "Jackie Santana",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/jackie1santana/showTimeAgoUtility/issues"
+  },
+  "homepage": "https://github.com/jackie1santana/showTimeAgoUtility#readme"
+}
