@@ -1,6 +1,7 @@
 # Show Time Ago Utility
-> Developed by Jackie Santana
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
+
+> Developed by Jackie Santana
 
 ###### This an Open Source utility project. I welcome any & all contributions via the development branch only.
 ---
