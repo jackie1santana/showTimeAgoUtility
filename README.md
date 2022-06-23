@@ -12,6 +12,11 @@
 ##### List of time suffixes:
 - minutes, hours, days, weeks, months, years 'ago..'
 
+**Installation**
+ _To install this utility, you need to install the following dependencies:_
+
+`npm i show-time-ago` or `npm install show-time-ago`
+
 **Import**
 
 `import { showTimeAgo } from 'show-time-ago';`
