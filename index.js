@@ -1,6 +1,3 @@
-// to use this, just import it in your component & just place in your date inside: {showTimeAgo("2022-06-20T13:42:29-05:00")}
-// this function takes in a .ISO date string/new Date().toISOString() and returns a string of the time ago in the format: "2 days ago" & etc
-// This is a helper function that will show your time or 'mins ago' dynamically
 export const showTimeAgo = () => {
     const MONTH_NAMES = [
         'January',
@@ -69,6 +66,7 @@ export const showTimeAgo = () => {
         }
         
     }
+
 
     function timeAgo(dateParam) {
         if (!dateParam) {
