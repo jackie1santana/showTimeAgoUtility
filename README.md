@@ -1,5 +1,8 @@
 # Show Time Ago Utility
+
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
+<a href="https://www.npmjs.com/package/showtimeago"><img src="https://img.shields.io/npm/v/showtimeago.svg?style=flat-square&colorB=51C838"
+alt="NPM Version"></a>
 
 > Developed by Jackie Santana
 
@@ -25,7 +28,7 @@ ___
 - ES6: `import showTimeAgo from 'showtimeago'`
 - commonJS: `const showTimeAgo = require('showtimeago')`
 
-_currently not available via cdn_
+_currently not available via cdn/yarn/pmnpm (coming soon)_
 
 ex:
 ```
@@ -43,7 +46,7 @@ This utility only takes in a ISO date, for example:
 outputs: `2022-06-20T13:42:29-05:00` _ISO date format_
 
 #### Contributing
-***
+---
 1) Fork it (https://github.com/yourname/yourproject/fork)
 2) Create your feature branch (git checkout -b feature/fooBar)
 3) Commit your changes (git commit -am 'Add some fooBar')
