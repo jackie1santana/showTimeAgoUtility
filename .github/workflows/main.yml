@@ -1,0 +1,12 @@
+name: learn-github-actions
+on: [push]
+jobs:
+  showtime_util_job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: jackie1santana/checkout@v3
+      - uses: jackie1santana/setup-node@v3
+        with:
+          node-version: '14'
+      - run: npm install -g bats
+      - run: bats -v
