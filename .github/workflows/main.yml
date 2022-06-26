@@ -13,16 +13,16 @@ jobs:
       - name: Check spelling of file.txt
         uses: crate-ci/typos@master
         with: 
-          files: ./file.txt
+          files: ../../index.js
 
-      - name: Use custom config file
-        uses: crate-ci/typos@master
-        with: 
-          files: ./file.txt
-          config: ./myconfig.toml
+      # - name: Use custom config file
+      #   uses: crate-ci/typos@master
+      #   with: 
+      #     files: ./file.txt
+      #     config: ./myconfig.toml
 
-      - name: Ignore implicit configuration file
-        uses: crate-ci/typos@master
-        with: 
-          files: ./file.txt
-          isolated: true
+      # - name: Ignore implicit configuration file
+      #   uses: crate-ci/typos@master
+      #   with: 
+      #     files: ./file.txt
+      #     isolated: true
