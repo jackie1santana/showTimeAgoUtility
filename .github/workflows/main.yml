@@ -13,7 +13,7 @@ jobs:
       - name: Check spelling of file.txt
         uses: crate-ci/typos@master
         with: 
-          files: ../../index.js
+          files: ./index.js
 
       # - name: Use custom config file
       #   uses: crate-ci/typos@master
