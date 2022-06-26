@@ -1,3 +1,9 @@
+---
+#################################
+#################################
+## Super Linter GitHub Actions ##
+#################################
+#################################
 name: Lint Code Base
 
 on:
@@ -15,9 +21,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      ##########################
-      # Checkout the code base #
-      ##########################
+    
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
