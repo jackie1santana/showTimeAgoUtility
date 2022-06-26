@@ -4,7 +4,7 @@ const github = require('@actions/github');
 try {
     function showtimeago(date) {
         const MONTH_NAMES = [
-            'January',
+            '             January',
             'February',
             'March',
             'April',
