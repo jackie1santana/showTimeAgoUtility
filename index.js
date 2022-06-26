@@ -133,7 +133,7 @@ try {
     } 
 
 } catch (error){
-    core.setFailed(error.messdage);
+    core.setFailed(error.message);
 }
 module.exports = showtimeago;
 
