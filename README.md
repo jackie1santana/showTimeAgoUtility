@@ -50,10 +50,26 @@ outputs: `2022-06-20T13:42:29-05:00` _ISO date format_
 
 _How to `showTimeAgo` updated time without a page reload ?_
 
-**React Example**
+**Vanilla Javascript Example:**
+
+```
+const showTimeAgo = require('showtimeago');
+
+ let showPastTime = showTimeAgo("2022-07-01T22:28:29-05:00")
+ let showTimeAgoToBrowser = document.querySelector('div')
+ showTimeAgoToBrowser.innerHTML = `${timer}`;
+
+setInterval(() => {
+    showPastTime = showTimeAgo("2022-07-01T22:28:29-05:00")
+    showTimeAgoToBrowser.innerHTML = `${showPastTime}`;
+
+    // 600000 = 1 minute in ms
+}, 60000)
+```
+
+**React Example:**
 ```
 import * as React from "react";
-
 import showTimeAgo from "showtimeago";
 
 export default function App() {
