@@ -48,7 +48,7 @@ outputs: `2022-06-20T13:42:29-05:00` _ISO date format_
 ---
 #### By default `showTimeAgo` only updates on page reload
 
-_How to `showTimeAgo` updated time without a page reload ?_
+_How to show `showTimeAgo` updated time without a page reload ?_
 
 **Vanilla Javascript Example:**
 
