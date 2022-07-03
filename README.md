@@ -15,6 +15,9 @@ alt="NPM Version"></a>
 ##### List of time suffixes:
 - minutes, hours, days, weeks, months, years 'ago..'
 
+##### Default: showTimeago updates on page reload
+ _dynamically update time without page reload? code examples shown below_
+
 ## Installation
  _To install this utility, you need to install the following dependencies:_
 
@@ -41,9 +44,57 @@ showTimeAgo("2022-06-20T13:42:29-05:00")
 console.log(showTimeAgo("2022-06-20T13:42:29-05:00"))
 ```
 
-This utility only takes in a ISO date, for example: 
+This utility only takes in a newDate() format time, for example: 
 `new Date().toISOString()` 
 outputs: `2022-06-20T13:42:29-05:00` _ISO date format_
+
+---
+#### By default `showTimeAgo` only updates on page reload
+
+_How to show `showTimeAgo` updated time without a page reload ?_
+
+**Vanilla Javascript Example:**
+
+```
+const showTimeAgo = require('showtimeago');
+
+ let showPastTime = showTimeAgo('2022-07-03T02:38:22.411Z')
+ const showTimeAgoToBrowser = document.querySelector('div')
+ showTimeAgoToBrowser.innerHTML = `${showPastTime}`;
+
+setInterval(() => {
+    showPastTime = showTimeAgo('2022-07-03T02:38:22.411Z')
+    showTimeAgoToBrowser.innerHTML = `${showPastTime}`;
+
+    // 600000 = 1 minute in ms
+}, 60000)
+clearInterval(showPastTime)
+```
+
+**React Example:**
+```
+import * as React from "react";
+import showTimeAgo from "showtimeago";
+
+export default function App() {
+  const [showPastTime, setPastTime] = React.useState(null);
+
+  React.useEffect(() => {
+    setPastTime(showTimeAgo('2022-07-03T02:38:22.411Z'));
+
+    const timer = window.setInterval(() => {
+      setPastTime(showTimeAgo('2022-07-03T02:38:22.411Z'));
+
+      // 600000 = 1 minute in ms
+    }, 60000);
+
+    return () => window.clearInterval(timer);
+  }, [showPastTime]);
+
+  return <div>User Posted Comment { showPastTime }</div>;
+}
+```
+_With the code above `ShowTimeAgo` will dynamically change per minute without a page reload_
 
 #### Contributing
 ---
