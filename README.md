@@ -32,8 +32,6 @@ ___
 - ES6: `import showTimeAgo from 'showtimeago'`
 - commonJS: `const showTimeAgo = require('showtimeago')`
 
-_currently not available via cdn/yarn/pmnpm (coming soon)_
-
 ex:
 ```
 //vanilla javascript
