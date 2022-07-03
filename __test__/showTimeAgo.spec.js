@@ -1,6 +1,6 @@
 const showTimeAgo = require('../index');
 
-const randomDate = '2022-07-02T23:38:22.411Z';
+const today = new Date();
 
 // const shouldInclude = 'now' 
 // || 'seconds ago' 
@@ -18,19 +18,19 @@ const randomDate = '2022-07-02T23:38:22.411Z';
 // || 'Today';
 
 test('showTimeAgo Utility to return a string', () => {
-    expect(typeof showTimeAgo(randomDate)).toBe('string');
+    expect(typeof showTimeAgo(today)).toBe('string');
 });
 
 test('showTimeAgo Utility to not be undefined', () => {
-    expect(showTimeAgo(randomDate)).toBeDefined();
+    expect(showTimeAgo(today)).toBeDefined();
 });
 
 test('showTimeAgo Utility to not be NaN', () => {
-    expect(typeof showTimeAgo(randomDate)).not.toBeNaN();
+    expect(typeof showTimeAgo(today)).not.toBeNaN();
 });
 
 // test('showTimeAgo Utility to include certain words', () => {
-//     expect(showTimeAgo(randomDate)).toContain(shouldInclude);
+//     expect(showTimeAgo(today)).toContain(shouldInclude);
 // });
 
 test('showTimeAgo Utility by default should not have an argument', () => {

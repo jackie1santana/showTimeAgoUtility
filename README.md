@@ -70,6 +70,7 @@ setInterval(() => {
 
     // 600000 = 1 minute in ms
 }, 60000)
+
 clearInterval(showPastTime)
 ```
 
