@@ -1,6 +1,3 @@
-const core = require('@actions/core');
-const github = require('@actions/github');
-
 try {
     function showtimeago(date) {
         const MONTH_NAMES = [
@@ -111,7 +108,7 @@ try {
         return timeAgo(date);
     }
 } catch (error) {
-    core.setFailed(error.message);
+    throw new Error (error.message);
 }
 
 module.exports = showtimeago;

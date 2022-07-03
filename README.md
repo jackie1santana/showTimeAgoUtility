@@ -32,8 +32,6 @@ ___
 - ES6: `import showTimeAgo from 'showtimeago'`
 - commonJS: `const showTimeAgo = require('showtimeago')`
 
-_currently not available via cdn/yarn/pmnpm (coming soon)_
-
 ex:
 ```
 //vanilla javascript
@@ -49,7 +47,24 @@ This utility only takes in a newDate() format time, for example:
 `new Date().toISOString()` 
 outputs: `2022-07-02T23:12:01.449Z` _ISO date format_
 
----
+**CDN**: 
+- https://cdn.jsdelivr.net/npm/showtimeago/index.js 
+- https://unpkg.com/browse/showtimeago/index.js
+
+_This essentially a common Js module so ignore error: `Uncaught ReferenceError: module is not defined
+    at showTimeAgo.js:115:1` via client side._
+
+**CDN Set up:**
+
+`<script crossorigin type="text/javascript" src="https://unpkg.com/browse/showtimeago/index.js"></script>`
+```
+const showTimeAgo = showtimeago
+
+console.log(showTimeAgo(new Date()))
+```
+
+**Yarn**: https://yarnpkg.com/package/showtimeago `yarn add showtimeago`
+___
 #### By default `showTimeAgo` only updates on page reload
 
 _How to show `showTimeAgo` updated time without a page reload ?_
