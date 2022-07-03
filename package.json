@@ -1,6 +1,6 @@
 {
   "name": "showtimeago",
-  "version": "3.3.10",
+  "version": "3.3.11",
   "description": "Show Time Ago is a utility that allows you to see how long ago a date was.",
   "main": "index.js",
   "scripts": {
