@@ -137,9 +137,3 @@ try {
 }
 module.exports = showtimeago;
 
-console.log(typeof showtimeago())
-
-if (showtimeago() == undefined){
-    console.log('undefined')
-}
-
