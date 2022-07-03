@@ -17,18 +17,17 @@ try {
             'November',
             'December',
         ];
-    
+
         function getOrdinalNum() {
             return (
                 n +
-                (n > 0
-                    ? ['th', 'st', 'nd', 'rd'][
-                          (n > 3 && n < 21) || n % 10 > 3 ? 0 : n % 10
-                      ]
-                    : '')
+                (n > 0 ? ['th', 'st', 'nd', 'rd'][
+                        (n > 3 && n < 21) || n % 10 > 3 ? 0 : n % 10
+                    ] :
+                    '')
             );
         }
-    
+
         function getFormattedDate(
             date,
             preformattedDate = false,
@@ -39,25 +38,24 @@ try {
             const year = date.getFullYear();
             let hours = date.getHours();
             let minutes = date.getMinutes();
-    
             let ampm = hours >= 12 ? 'pm' : 'am';
-    
-            switch(true){
+
+            switch (true) {
                 case (hours > 12):
                     hours = hours - 12;
                     break;
                 case (hours === 0):
                     hours = 12;
                     break;
-                case(minutes < 10):
+                case (minutes < 10):
                     minutes = `0${minutes}`;
                     break;
-                case(preformattedDate):
-                // Today at 10:20am
-                // Yesterday at 10:20am
+                case (preformattedDate):
+                    // Today at 10:20am
+                    // Yesterday at 10:20am
                     return `${preformattedDate} at ${hours}:${minutes} ${ampm}`;
-    
-                case(hideYear):
+
+                case (hideYear):
                     // January 10th at 10:20pm
                     return `${month} ${getOrdinalNum(
                         day
@@ -68,22 +66,22 @@ try {
                         day
                     )}, ${year} at ${hours}:${minutes} ${ampm}`;
             }
-            
+
         }
-    
-    
+
+
         function timeAgo(dateParam) {
             if (!dateParam) {
                 return null;
             }
-    
+
             const date =
                 typeof dateParam === 'object' ? dateParam : new Date(dateParam);
             const DAY_IN_MS = 86400000; // 24 * 60 * 60 * 1000
             const today = new Date();
-    
+
             const yesterday = new Date(today - DAY_IN_MS);
-    
+
             const seconds = Math.round((today - date) / 1000);
             const minutes = Math.round(seconds / 60);
             const hour = Math.round(seconds / 3600);
@@ -94,8 +92,8 @@ try {
             const isYesterday =
                 yesterday.toDateString() === date.toDateString();
             const isThisYear = today.getFullYear() === date.getFullYear();
-    
-            switch(true){
+
+            switch (true) {
                 case (seconds < 5):
                     return 'now';
                 case (seconds < 60):
@@ -110,9 +108,9 @@ try {
                     return `${hour} hours ago`; // 2 hours ago
                 case (isToday):
                     return getFormattedDate(date, 'Today'); // Today at 10:20am
-                case (isYesterday): 
+                case (isYesterday):
                     return getFormattedDate(date, 'Yesterday'); // Yesterday at 10:20am
-                case(day > 1 && day <= 30):
+                case (day > 1 && day <= 30):
                     return `${day} days ago`; // 2 days ago
                 case (isThisYear):
                     return getFormattedDate(date, false, true); // January 10th at 10:20pm 
@@ -128,12 +126,11 @@ try {
                     return getFormattedDate(date); // January 10th 2022 at 10:20pm
             }
         }
-    
-        return timeAgo(date);
-    } 
 
-} catch (error){
+        return timeAgo(date);
+    }
+
+} catch (error) {
     core.setFailed(error.message);
 }
 module.exports = showtimeago;
-
