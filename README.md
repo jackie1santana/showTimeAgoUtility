@@ -55,16 +55,17 @@ _How to show `showTimeAgo` updated time without a page reload ?_
 ```
 const showTimeAgo = require('showtimeago');
 
- let showPastTime = showTimeAgo("2022-07-01T22:28:29-05:00")
- let showTimeAgoToBrowser = document.querySelector('div')
- showTimeAgoToBrowser.innerHTML = `${timer}`;
+ let showPastTime = showTimeAgo('2022-07-03T02:38:22.411Z')
+ const showTimeAgoToBrowser = document.querySelector('div')
+ showTimeAgoToBrowser.innerHTML = `${showPastTime}`;
 
 setInterval(() => {
-    showPastTime = showTimeAgo("2022-07-01T22:28:29-05:00")
+    showPastTime = showTimeAgo('2022-07-03T02:38:22.411Z')
     showTimeAgoToBrowser.innerHTML = `${showPastTime}`;
 
     // 600000 = 1 minute in ms
 }, 60000)
+clearInterval(showPastTime)
 ```
 
 **React Example:**
@@ -76,10 +77,10 @@ export default function App() {
   const [showPastTime, setPastTime] = React.useState(null);
 
   React.useEffect(() => {
-    setPastTime(showTimeAgo("2022-07-02T02:04:33.947Z"));
+    setPastTime(showTimeAgo('2022-07-03T02:38:22.411Z'));
 
     const timer = window.setInterval(() => {
-      setPastTime(showTimeAgo("2022-07-02T02:04:33.947Z"));
+      setPastTime(showTimeAgo('2022-07-03T02:38:22.411Z'));
 
       // 600000 = 1 minute in ms
     }, 60000);
@@ -89,7 +90,6 @@ export default function App() {
 
   return <div>User Posted Comment { showPastTime }</div>;
 }
-
 ```
 _With the code above `ShowTimeAgo` will dynamically change per minute without a page reload_
 
