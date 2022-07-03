@@ -1,9 +1,10 @@
 # Show Time Ago Utility
 
-[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
-<a href="https://www.npmjs.com/package/showtimeago"><img src="https://img.shields.io/npm/v/showtimeago.svg?style=flat-square&colorB=51C838"
-alt="NPM Version"></a>
-<a href="https://github.com/jackie1santana/showTimeAgoUtility/actions/workflows/unit-test-action.yml">[![Test showTimeAgo Utility](https://github.com/jackie1santana/showTimeAgoUtility/actions/workflows/unit-test-action.yml/badge.svg)](https://github.com/jackie1santana/showTimeAgoUtility/actions/workflows/unit-test-action.yml)</a>
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/) <a href="https://www.npmjs.com/package/showtimeago"><img src="https://img.shields.io/npm/v/showtimeago.svg?style=flat-square&colorB=51C838"
+alt="NPM Version"></a> <a href="https://github.com/jackie1santana/showTimeAgoUtility/actions/workflows/unit-test-action.yml">[![Test showTimeAgo Utility](https://github.com/jackie1santana/showTimeAgoUtility/actions/workflows/unit-test-action.yml/badge.svg)](https://github.com/jackie1santana/showTimeAgoUtility/actions/workflows/unit-test-action.yml)</a>
+
+
+
 
 > Developed by Jackie Santana
 
@@ -40,14 +41,14 @@ ex:
 showTimeAgo("2022-06-20T13:42:29-05:00")
 
 //in react
-{showTimeAgo("2022-06-20T13:42:29-05:00")}
+{showTimeAgo('2022-07-02T23:12:01.449Z')}
 
-console.log(showTimeAgo("2022-06-20T13:42:29-05:00"))
+console.log(showTimeAgo('2022-07-02T23:12:01.449Z'))
 ```
 
 This utility only takes in a newDate() format time, for example: 
 `new Date().toISOString()` 
-outputs: `2022-06-20T13:42:29-05:00` _ISO date format_
+outputs: `2022-07-02T23:12:01.449Z` _ISO date format_
 
 ---
 #### By default `showTimeAgo` only updates on page reload
@@ -59,12 +60,12 @@ _How to show `showTimeAgo` updated time without a page reload ?_
 ```
 const showTimeAgo = require('showtimeago');
 
- let showPastTime = showTimeAgo('2022-07-03T02:38:22.411Z')
+ let showPastTime = showTimeAgo('2022-07-02T23:12:01.449Z')
  const showTimeAgoToBrowser = document.querySelector('div')
  showTimeAgoToBrowser.innerHTML = `${showPastTime}`;
 
 setInterval(() => {
-    showPastTime = showTimeAgo('2022-07-03T02:38:22.411Z')
+    showPastTime = showTimeAgo('2022-07-02T23:12:01.449Z')
     showTimeAgoToBrowser.innerHTML = `${showPastTime}`;
 
     // 600000 = 1 minute in ms
@@ -81,10 +82,10 @@ export default function App() {
   const [showPastTime, setPastTime] = React.useState(null);
 
   React.useEffect(() => {
-    setPastTime(showTimeAgo('2022-07-03T02:38:22.411Z'));
+    setPastTime(showTimeAgo('2022-07-02T23:12:01.449Z'));
 
     const timer = window.setInterval(() => {
-      setPastTime(showTimeAgo('2022-07-03T02:38:22.411Z'));
+      setPastTime(showTimeAgo('2022-07-02T23:12:01.449Z'));
 
       // 600000 = 1 minute in ms
     }, 60000);
