@@ -30,8 +30,8 @@ try {
 
         function getFormattedDate(
             date,
-            preformattedDate = false,
-            hideYear = false
+            preformattedDate,
+            hideYear
         ) {
             const day = date.getDate();
             const month = MONTH_NAMES[date.getMonth()];
@@ -42,19 +42,15 @@ try {
 
             switch (true) {
                 case (hours > 12):
-                    hours = hours - 12;
-                    break;
+                    hours -= 12;
                 case (hours === 0):
                     hours = 12;
-                    break;
                 case (minutes < 10):
-                    minutes = `0${minutes}`;
-                    break;
+                    minutes = `${minutes}`;
                 case (preformattedDate):
                     // Today at 10:20am
                     // Yesterday at 10:20am
-                    return `${preformattedDate} at ${hours}:${minutes} ${ampm}`;
-
+                    return `${ preformattedDate } at ${ hours }:${ minutes } ${ampm}`;
                 case (hideYear):
                     // January 10th at 10:20pm
                     return `${month} ${getOrdinalNum(
@@ -89,8 +85,7 @@ try {
             const month = Math.round(seconds / 2629800);
             const year = Math.floor(seconds / 31536000);
             const isToday = today.toDateString() === date.toDateString();
-            const isYesterday =
-                yesterday.toDateString() === date.toDateString();
+            const isYesterday = yesterday.toDateString() === date.toDateString();
             const isThisYear = today.getFullYear() === date.getFullYear();
 
             switch (true) {
@@ -133,4 +128,5 @@ try {
 } catch (error) {
     core.setFailed(error.message);
 }
+
 module.exports = showtimeago;
