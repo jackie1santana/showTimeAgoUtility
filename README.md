@@ -63,7 +63,7 @@ const showTimeAgo = showtimeago
 console.log(showTimeAgo(new Date()))
 ```
 
-**Yarn**: https://yarnpkg.com/package/showtimeago `yarn add showtimeago`
+**Yarn**: [https://yarnpkg.com/package/showtimeago ](https://yarnpkg.com/package?q=showtimeago&name=showtimeago&version=3.3.13)`yarn add showtimeago`
 ___
 #### By default `showTimeAgo` only updates on page reload
 
