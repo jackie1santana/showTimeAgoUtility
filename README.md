@@ -56,13 +56,13 @@ outputs: `2022-07-02T23:12:01.449Z` _ISO date format_
 
 **CDN 🌐**: 
 - https://cdn.jsdelivr.net/npm/showtimeago/index.js 
-- https://unpkg.com/browse/showtimeago/index.js
+- https://unpkg.com/showtimeago@4.0.4/index.js
 
 _This is essentially a CommonJS module, so you may ignore the error: Uncaught ReferenceError: module is not defined at showTimeAgo.js:115:1 on the client side._
 
 **CDN Set up:**
 
-`<script crossorigin type="text/javascript" src="https://unpkg.com/browse/showtimeago/index.js"></script>`
+`<script crossorigin type="text/javascript" src="https://unpkg.com/showtimeago@4.0.4/index.js"></script>`
 ```
 const showTimeAgo = showtimeago
 
@@ -73,29 +73,110 @@ console.log(showTimeAgo(new Date()))
 ___
 #### By default, showTimeAgo updates only when the page is reloaded
 
-_How to display showTimeAgo with real-time updates without reloading the page?_
+# Time Ago Display Examples
+___
+## Node.js Example (with reload)
 
-**Vanilla Javascript Example:**
-
-```
+```javascript
 const showTimeAgo = require('showtimeago');
 
- let showPastTime = showTimeAgo('2022-07-02T23:12:01.449Z')
- const showTimeAgoToBrowser = document.querySelector('div')
- showTimeAgoToBrowser.innerHTML = `${showPastTime}`;
+function updateTimeAgo() {
+    const showPastTime = showTimeAgo('2024-07-18T17:12:00.000Z');
+    console.clear(); // Clear the console
+    console.log(`Time ago: ${showPastTime}`);
+}
 
-setInterval(() => {
-    showPastTime = showTimeAgo('2022-07-02T23:12:01.449Z')
-    showTimeAgoToBrowser.innerHTML = `${showPastTime}`;
+// Initial update
+updateTimeAgo();
 
-    // 600000 = 1 minute in ms
-}, 60000)
+// Update every minute
+const intervalId = setInterval(updateTimeAgo, 60000);
 
-clearInterval(showPastTime)
+// To stop the interval after a certain time (e.g., 1 hour):
+// setTimeout(() => clearInterval(intervalId), 3600000);
+``` 
+## Node.js Example (with reload) writing to a file
+
+```javascript
+const showTimeAgo = require('showtimeago');
+const fs = require('fs');
+
+function updateTimeAgo() {
+    const showPastTime = showTimeAgo('2024-07-18T17:12:00.000Z');
+    fs.writeFileSync('timeago.txt', `Time ago: ${showPastTime}`);
+    console.log(`Updated timeago.txt: ${showPastTime}`);
+}
+
+// Initial update
+updateTimeAgo();
+
+// Update every minute
+const intervalId = setInterval(updateTimeAgo, 60000);
+
+// To stop the interval after a certain time (e.g., 1 hour):
+// setTimeout(() => clearInterval(intervalId), 3600000);
+```
+___
+## Vanilla JavaScript Example
+
+### HTML Setup
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Ago Example</title>
+</head>
+
+<body>
+  <div id="timeAgoDisplay"></div>
+  <script src="https://cdn.jsdelivr.net/npm/showtimeago/index.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
 ```
 
-**React Example:**
+### (without reload in Vanilla JS)
+
+```javascript
+const showTimeAgo = window.showTimeAgo;
+
+function updateTimeAgo() {
+    const showPastTime = showTimeAgo('2024-07-18T17:12:00.000Z');
+    const showTimeAgoToBrowser = document.getElementById('timeAgoDisplay');
+    showTimeAgoToBrowser.textContent = `Time ago: ${showPastTime}`;
+}
+
+// Initial update
+updateTimeAgo();
+
+// Update every minute without reloading the page
+setInterval(updateTimeAgo, 60000);
 ```
+
+### (with reload in Vanilla JS)
+
+```javascript
+const showTimeAgo = window.showTimeAgo;
+
+function updateTimeAgo() {
+    const showPastTime = showTimeAgo('2024-07-18T17:12:00.000Z');
+    const showTimeAgoToBrowser = document.getElementById('timeAgoDisplay');
+    showTimeAgoToBrowser.innerHTML = `Time ago: ${showPastTime}`;
+}
+
+// Initial update
+updateTimeAgo();
+
+// Update every minute
+setInterval(updateTimeAgo, 60000);
+```
+___
+## React Example (with rerender)
+```jsx
 import * as React from "react";
 import showTimeAgo from "showtimeago";
 
@@ -103,21 +184,54 @@ export default function App() {
   const [showPastTime, setPastTime] = React.useState(null);
 
   React.useEffect(() => {
-    setPastTime(showTimeAgo('2022-07-02T23:12:01.449Z'));
+    function updateTimeAgo() {
+      setPastTime(showTimeAgo('2024-07-18T17:12:00.000Z'));
+    }
 
-    const timer = window.setInterval(() => {
-      setPastTime(showTimeAgo('2022-07-02T23:12:01.449Z'));
+    // Initial update
+    updateTimeAgo();
 
-      // 600000 = 1 minute in ms
-    }, 60000);
+    // Update every minute
+    const timer = setInterval(updateTimeAgo, 60000);
 
-    return () => window.clearInterval(timer);
-  }, [showPastTime]);
+    // Cleanup function
+    return () => clearInterval(timer);
+  }, []); // Empty dependency array means this effect runs once on mount
 
-  return <div>User Posted Comment { showPastTime }</div>;
+  return <div>User Posted Comment {showPastTime}</div>;
 }
 ```
-_With the code above, ShowTimeAgo will automatically update every minute without needing a page reload._
+
+## React Example (without rerender)
+
+```jsx
+import * as React from "react";
+import showTimeAgo from "showtimeago";
+
+export default function App() {
+  const [showPastTime, setPastTime] = React.useState(null);
+
+  React.useEffect(() => {
+    function updateTimeAgo() {
+      const currentTime = showTimeAgo('2024-07-18T17:12:00.000Z');
+      if (currentTime !== showPastTime) {
+        setPastTime(currentTime);
+      }
+    }
+
+    // Initial update
+    updateTimeAgo();
+
+    // Update every minute without causing a re-render if the value hasn't changed
+    const timer = setInterval(updateTimeAgo, 60000);
+
+    // Cleanup function
+    return () => clearInterval(timer);
+  }, [showPastTime]); // Add showPastTime as a dependency
+
+  return <div>User Posted Comment {showPastTime}</div>;
+}
+```
 
 ## Contributing 🤝
 We welcome all contributions! If you have any cool ideas or features you think should be added, please:

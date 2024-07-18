@@ -18,7 +18,7 @@ function showtimeago(dateParam) {
             const year = date.getFullYear();
             let hours = date.getHours();
             let minutes = date.getMinutes();
-            const ampm = hours >= 12 ? 'pm' : 'am';
+            const ampm = hours >= 12 ? 'PM' : 'AM';
 
             hours = hours % 12 || 12; // Convert hours to 12-hour format
             minutes = minutes < 10 ? `0${minutes}` : minutes; // Add leading zero to minutes
@@ -136,7 +136,7 @@ function showtimeago(dateParam) {
     }
 }
 
-console.log(showtimeago("2024-07-18T17:12:00.000Z"));
+// console.log(showtimeago("2024-07-18T17:12:00.000Z"));
 // Example usage to test with current time
 // const now = new Date();
 // console.log("Current time:", now.toISOString());
