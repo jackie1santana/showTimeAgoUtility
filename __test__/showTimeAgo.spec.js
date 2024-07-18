@@ -4,98 +4,103 @@ const today = new Date();
 const currentYear = today.getFullYear();
 
 const getCurrentDay = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday'
-]
+    'Sunday', 'Monday', 'Tuesday', 'Wednesday',
+    'Thursday', 'Friday', 'Saturday'
+];
 
 const getCurrentMonth = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-]
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+];
 
+// Utility function to generate a random number between min and max 
+const randomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
-//random number of days
-const randomDayNumber = (min, max) => { // min and max included 
-    return Math.floor(Math.random() * (max - min + 1) + min)
-  }
+// Dates for testing
+const previousDay = new Date(today.getTime() - 86400000); // Yesterday
+const twoDaysAgo = new Date(today.getTime() - 2 * 86400000); // Two days ago
+const oneMonthAgo = new Date(today.getTime() - 30 * 86400000); // One month ago
+const sixMonthsAgo = new Date(today.getTime() - 6 * 30 * 86400000); // Six months ago
+const oneYearAgo = new Date(today.getTime() - 365 * 86400000); // One year ago
+const randomYearsAgo = new Date(today.getTime() - randomNumber(2, 20) * 365 * 86400000); // Random years ago
 
-//check previous day
-const prevNumberDay = new Date().getDate() - 1;
-const previousDay = new Date(`${getCurrentDay[today.getDay()]} ${getCurrentMonth[today.getMonth()]} ${prevNumberDay} ${currentYear}`)
-
-//check previous days
-const previousDays = new Date(`${getCurrentDay[today.getDay()]} ${getCurrentMonth[today.getMonth()]} ${today.getDate() - 2} ${currentYear}`)
-
-//create random years
-const randomYearNumber = (min, max) => { // min and max included 
-    return Math.floor(Math.random() * (max - min + 1) + min)
-  }
-
-//check previous year
-const prevYear = today.getFullYear() - 1;
-const aYearFromNow = new Date(`Sun July 02 ${prevYear}`)
-
-//check previous years
-const prevYears = today.getFullYear() - randomYearNumber(2, 20);
-const yearsFromNow = new Date(`Sun July 02 ${prevYears}`)
-
-test('showTimeAgo Utility to return a string', () => {
+// Tests
+test('showTimeAgo Utility should return a string', () => {
     expect(typeof showTimeAgo(today)).toBe('string');
 });
 
-test('showTimeAgo Utility to not be undefined', () => {
+test('showTimeAgo Utility should not be undefined', () => {
     expect(showTimeAgo(today)).toBeDefined();
 });
 
-test('showTimeAgo Utility to not be NaN', () => {
-    expect(typeof showTimeAgo(today)).not.toBeNaN();
+test('showTimeAgo Utility should not be NaN', () => {
+    expect(showTimeAgo(today)).not.toBeNaN();
 });
 
-test('showTimeAgo Utility by default should not have an argument', () => {
+test('showTimeAgo Utility should return null for no argument', () => {
     expect(showTimeAgo()).toBeNull();
 });
 
-test('showTimeAgo Utility type to be a function object', () => {
-    expect(typeof showTimeAgo()).toBe('object');
+test('showTimeAgo Utility type should be a function object', () => {
+    expect(typeof showTimeAgo).toBe('function');
 });
 
 test('Test Date today', () => {
     expect(showTimeAgo(today)).toContain('now');
 });
 
-test('Test Date from Yesterday', () => {
-    // if test fail, it is because it is the same day or it will should a - negative integer.
+test('Test Date from yesterday', () => {
     expect(showTimeAgo(previousDay)).toContain('Yesterday at');
 });
 
-
-test('Test Date from days ago', () => {
-    // if test fail, it is because it is the same day or 2nd day of the month or it will should a - negative integer.
-    expect(showTimeAgo(previousDays)).toContain('days ago');
+test('Test Date from two days ago', () => {
+    expect(showTimeAgo(twoDaysAgo)).toContain('days ago');
 });
 
-
-test('Test Date from 1 year ago', () => {
-    expect(showTimeAgo(aYearFromNow)).toBe('1 year ago');
+test('Test Date from one month ago', () => {
+    expect(showTimeAgo(oneMonthAgo)).toContain('days ago');
 });
 
-test('Test Date from years ago', () => {
-    expect(showTimeAgo(yearsFromNow)).toContain('years ago');
+test('Test Date from six months ago', () => {
+    expect(showTimeAgo(sixMonthsAgo)).toContain('months ago');
 });
 
+test('Test Date from one year ago', () => {
+    expect(showTimeAgo(oneYearAgo)).toBe('1 year ago');
+});
 
+test('Test Date from random years ago', () => {
+    const years = today.getFullYear() - randomYearsAgo.getFullYear();
+    expect(showTimeAgo(randomYearsAgo)).toBe(`${years} years ago`);
+});
+
+// Edge case tests
+test('Test Date for the start of Unix Epoch (January 1, 1970)', () => {
+    const epoch = new Date(0);
+    expect(showTimeAgo(epoch)).toContain('January 1, 1970 at');
+});
+
+test('Test Date for a future date', () => {
+    const futureDate = new Date(today.getTime() + 86400000); // Tomorrow
+    expect(showTimeAgo(futureDate)).toBe('now');
+});
+
+test('Test Date for just a few seconds ago', () => {
+    const fewSecondsAgo = new Date(today.getTime() - 5000); // 5 seconds ago
+    expect(showTimeAgo(fewSecondsAgo)).toBe('now');
+});
+
+test('Test Date for exactly one minute ago', () => {
+    const oneMinuteAgo = new Date(today.getTime() - 60000); // 1 minute ago
+    expect(showTimeAgo(oneMinuteAgo)).toContain('about a minute ago');
+});
+
+test('Test Date for exactly one hour ago', () => {
+    const oneHourAgo = new Date(today.getTime() - 3600000); // 1 hour ago
+    expect(showTimeAgo(oneHourAgo)).toBe('1 hour ago');
+});
+
+test('Test Date for multiple hours ago (less than a day)', () => {
+    const hoursAgo = new Date(today.getTime() - 5 * 3600000); // 5 hours ago
+    expect(showTimeAgo(hoursAgo)).toContain('hours ago');
+});
