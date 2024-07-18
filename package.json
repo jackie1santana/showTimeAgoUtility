@@ -1,7 +1,7 @@
 {
   "name": "showtimeago",
   "version": "3.3.13",
-  "description": "Show Time Ago is a utility that allows you to see how long ago a date was.",
+  "description": "ShowTimeAgo is a utility that provides a human-readable format of how long ago a date was with zero configuration.",
   "main": "index.js",
   "scripts": {
     "test": "jest",
@@ -13,15 +13,17 @@
   },
   "keywords": [
     "showTimeAgo",
-    "show time ago",
-    "time",
     "time ago",
-    "utility",
+    "time",
     "date",
-    "date format"
+    "date format",
+    "relative time",
+    "time utility",
+    "time formatting",
+    "date utility"
   ],
   "author": "Jackie Santana",
-  "license": "GPL-3.0-or-later",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jackie1santana/showTimeAgoUtility/issues"
   },
