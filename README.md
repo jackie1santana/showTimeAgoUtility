@@ -69,7 +69,7 @@ const showTimeAgo = showtimeago
 console.log(showTimeAgo(new Date()))
 ```
 
-**Yarn**: [https://yarnpkg.com/package/showtimeago ](https://yarnpkg.com/package?q=showtimeago&name=showtimeago&version=3.3.13)`yarn add showtimeago`
+**Yarn**: [https://yarnpkg.com/package/showtimeago ](https://yarnpkg.com/package?q=showtimeago&name=showtimeago)`yarn add showtimeago`
 ___
 #### By default, showTimeAgo updates only when the page is reloaded
 
@@ -117,7 +117,7 @@ const intervalId = setInterval(updateTimeAgo, 60000);
 // setTimeout(() => clearInterval(intervalId), 3600000);
 ```
 
-### Node Example with Real-time Updates Via Comment Thread
+## Node Example with Real-time Updates Via Comment Thread
 ```javascript
 const showTimeAgo = require('showtimeago');
 
@@ -289,7 +289,7 @@ export default function App() {
 }
 ```
 
-### React Example with Real-time Updates Via Comment Thread
+## React Example with Real-time Updates Via Comment Thread
 
 This example demonstrates how to use the `showtimeago` package in a React application to display the time ago for comments, updating every minute.
 
