@@ -39,19 +39,26 @@ function showtimeago(dateParam) {
             if (!dateParam) return null;
 
             const date = typeof dateParam === 'object' ? dateParam : new Date(dateParam);
+            const now = new Date();
             const DAY_IN_MS = 86400000; // 24 * 60 * 60 * 1000
-            const today = new Date();
-            const yesterday = new Date(today - DAY_IN_MS);
+            const YEAR_IN_MS = 365.25 * DAY_IN_MS; // Account for leap years
+            const yesterday = new Date(now - DAY_IN_MS);
 
-            const seconds = Math.round((today - date) / 1000);
+            const seconds = Math.round((now - date) / 1000);
             const minutes = Math.round(seconds / 60);
             const hours = Math.round(minutes / 60);
             const days = Math.round(hours / 24);
-            const months = Math.round(days / 30);
-            const years = Math.floor(days / 365);
+            const months = Math.round(days / 30.44); // More accurate month calculation
+            const years = Math.floor(days / 365.25); // More accurate year calculation
 
-            const isToday = today.toDateString() === date.toDateString();
+            const isToday = now.toDateString() === date.toDateString();
             const isYesterday = yesterday.toDateString() === date.toDateString();
+
+            // Specific check for exactly one year ago
+            const oneYearAgo = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
+            if (date.toDateString() === oneYearAgo.toDateString()) {
+                return '1 year ago';
+            }
 
             switch (true) {
                 case (seconds < 5):
