@@ -58,9 +58,9 @@ function showtimeago(dateParam) {
             const now = new Date();
             const DAY_IN_MS = 86400000; // 24 * 60 * 60 * 1000
             const YEAR_IN_MS = 365.25 * DAY_IN_MS; // Account for leap years
-            const yesterday = new Date(now - DAY_IN_MS);
+            const yesterday = new Date(now.getTime() - DAY_IN_MS);
 
-            const seconds = Math.round((now - date) / 1000);
+            const seconds = Math.round((now.getTime() - date.getTime()) / 1000);
             const minutes = Math.round(seconds / 60);
             const hours = Math.round(minutes / 60);
             const days = Math.round(hours / 24);
@@ -76,8 +76,22 @@ function showtimeago(dateParam) {
                 return '1 year ago';
             }
 
+            // Detailed logging for debugging
+            // console.log({
+            //     seconds,
+            //     minutes,
+            //     hours,
+            //     days,
+            //     months,
+            //     years,
+            //     isToday,
+            //     isYesterday,
+            //     now,
+            //     date
+            // });
+
             switch (true) {
-                case (seconds < 5):
+                case (seconds < 2):
                     return 'now';
                 case (seconds < 60):
                     return `${seconds} seconds ago`;
@@ -115,5 +129,20 @@ function showtimeago(dateParam) {
         throw new Error(error.message);
     }
 }
+// console.log(showtimeago("2024-07-18T17:12:00.000Z"));
+// Example usage to test with current time
+// const now = new Date();
+// console.log("Current time:", now.toISOString());
+// console.log("Result:", showtimeago(now));
+
+// // Test with 5 seconds ago
+// const fiveSecondsAgo = new Date(now.getTime() - 5000);
+// console.log("5 seconds ago:", fiveSecondsAgo.toISOString());
+// console.log("Result:", showtimeago(fiveSecondsAgo));
+
+// // Test with 1 minute ago
+// const oneMinuteAgo = new Date(now.getTime() - 60000);
+// console.log("1 minute ago:", oneMinuteAgo.toISOString());
+// console.log("Result:", showtimeago(oneMinuteAgo));
 
 module.exports = showtimeago;
