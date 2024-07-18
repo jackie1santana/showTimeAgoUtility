@@ -18,7 +18,7 @@ alt="NPM Version"></a> <a href="https://github.com/jackie1santana/showTimeAgoUti
 ---
 
 ### What is Show Time Ago?
-> Show Time Ago is a utility that displays how long ago a given date was. Simply provide your ISO date: `showTimeAgo("2022-06-20T13:42:29-05:00")`, and this utility will dynamically update the time with the suffix 'ago'. For example: `2 minutes ago, 1 hour ago, 2 days ago, 1 month ago, 1 year ago`.
+> Show Time Ago is a utility that displays how long ago a given date was. Simply provide your ISO date: `showTimeAgo("2024-07-17T17:12:00.000Z")`, and this utility will dynamically update the time with the suffix 'ago'. For example: `2 minutes ago, 1 hour ago, 2 days ago, 1 month ago, 1 year ago`.
 
 ##### List of time suffixes:
 - minutes, hours, days, weeks, months, years 'ago..'
@@ -42,17 +42,17 @@ ___
 Example:
 ```javascript
 // Vanilla JavaScript
-showTimeAgo("2022-06-20T13:42:29-05:00")
+showTimeAgo("2024-07-17T17:12:00.000Z")
 
 // In React
-{showTimeAgo('2022-07-02T23:12:01.449Z')}
+{showTimeAgo('2024-07-17T17:12:00.000Z')}
 
-console.log(showTimeAgo('2022-07-02T23:12:01.449Z'))
+console.log(showTimeAgo('2024-07-17T17:12:00.000Z'))
 ```
 
 This utility only accepts a new Date() format time. For example:
 `new Date().toISOString()` 
-outputs: `2022-07-02T23:12:01.449Z` _ISO date format_
+outputs: `2024-07-17T17:12:00.000Z` _ISO date format_
 
 **CDN 🌐**: 
 - https://cdn.jsdelivr.net/npm/showtimeago/index.js 
@@ -116,6 +116,32 @@ const intervalId = setInterval(updateTimeAgo, 60000);
 // To stop the interval after a certain time (e.g., 1 hour):
 // setTimeout(() => clearInterval(intervalId), 3600000);
 ```
+
+### Node Example with Real-time Updates Via Comment Thread
+```javascript
+const showTimeAgo = require('showtimeago');
+
+const comments = [
+  { id: 1, text: "This is the first comment", date: "2024-07-17T17:12:00.000Z" },
+  { id: 2, text: "This is the second comment", date: "2024-07-18T17:12:00.000Z" }
+];
+
+function displayComments() {
+  comments.forEach(comment => {
+    const timeAgo = showTimeAgo(comment.date);
+    console.log(`Comment: ${comment.text}`);
+    console.log(`Time ago: ${timeAgo}`);
+    console.log('----------');
+  });
+}
+
+// Initial display
+displayComments();
+
+// Update every minute
+setInterval(displayComments, 60000);
+
+```
 ___
 ## Vanilla JavaScript Example
 
@@ -174,6 +200,36 @@ updateTimeAgo();
 // Update every minute
 setInterval(updateTimeAgo, 60000);
 ```
+
+### Vanilla JavaScript Example with Real-time Updates Via Comment Thread
+
+```javascript
+const comments = [
+  { id: 1, text: "This is the first comment", date: "2024-07-17T17:12:00.000Z" },
+  { id: 2, text: "This is the second comment", date: "2024-07-18T17:12:00.000Z" }
+];
+
+function updateComments() {
+  const commentsContainer = document.getElementById('timeAgoDisplay');
+  commentsContainer.innerHTML = '';
+
+  comments.forEach(comment => {
+    const timeAgo = showtimeago(comment.date);
+    const commentElement = document.createElement('div');
+    commentElement.innerHTML = `
+      <p>${comment.text}</p>
+      <p>${timeAgo}</p>
+    `;
+    commentsContainer.appendChild(commentElement);
+  });
+}
+
+// Initial update
+updateComments();
+
+// Update every minute
+setInterval(updateComments, 60000);
+```
 ___
 ## React Example (with rerender)
 ```jsx
@@ -231,6 +287,56 @@ export default function App() {
 
   return <div>User Posted Comment {showPastTime}</div>;
 }
+```
+
+### React Example with Real-time Updates Via Comment Thread
+
+This example demonstrates how to use the `showtimeago` package in a React application to display the time ago for comments, updating every minute.
+
+```jsx
+import React, { useEffect, useState } from 'react';
+import showTimeAgo from 'showtimeago';
+
+const comments = [
+  { id: 1, text: "This is the first comment", date: "2024-07-17T17:12:00.000Z" },
+  { id: 2, text: "This is the second comment", date: "2024-07-18T17:12:00.000Z" }
+];
+
+function App() {
+  const [timeAgoComments, setTimeAgoComments] = useState([]);
+
+  useEffect(() => {
+    const updateTimes = () => {
+      const updatedComments = comments.map(comment => ({
+        ...comment,
+        timeAgo: showTimeAgo(comment.date)
+      }));
+      setTimeAgoComments(updatedComments);
+    };
+
+    // Initial update
+    updateTimes();
+
+    // Update every minute
+    const intervalId = setInterval(updateTimes, 60000);
+
+    // Clear interval on component unmount
+    return () => clearInterval(intervalId);
+  }, []);
+
+  return (
+    <div>
+      {timeAgoComments.map(comment => (
+        <div key={comment.id}>
+          <p>{comment.text}</p>
+          <p>{comment.timeAgo}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default App;
 ```
 
 ## Contributing 🤝
