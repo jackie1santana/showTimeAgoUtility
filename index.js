@@ -56,6 +56,12 @@ function showtimeago(dateParam) {
         function timeAgo(dateParam) {
             const date = validateDateParam(dateParam);
             const now = new Date();
+
+            // Check if the date is in the future
+            if (date > now) {
+                throw new Error("Invalid date: The provided date is in the future.");
+            }
+
             const DAY_IN_MS = 86400000; // 24 * 60 * 60 * 1000
             const YEAR_IN_MS = 365.25 * DAY_IN_MS; // Account for leap years
             const yesterday = new Date(now.getTime() - DAY_IN_MS);
@@ -129,7 +135,8 @@ function showtimeago(dateParam) {
         throw new Error(error.message);
     }
 }
-// console.log(showtimeago("2024-07-18T17:12:00.000Z"));
+
+console.log(showtimeago("2024-07-18T17:12:00.000Z"));
 // Example usage to test with current time
 // const now = new Date();
 // console.log("Current time:", now.toISOString());
