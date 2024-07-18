@@ -18,10 +18,10 @@ alt="NPM Version"></a> <a href="https://github.com/jackie1santana/showTimeAgoUti
 ---
 
 ### What is Show Time Ago?
-> Show Time Ago is a utility that displays how long ago a given date was. Simply provide your ISO date: `showTimeAgo("2024-07-17T17:12:00.000Z")`, and this utility will dynamically update the time with the suffix 'ago'. For example: `2 minutes ago, 1 hour ago, 2 days ago, 1 month ago, 1 year ago`.
+> Show Time Ago is a utility that displays how long ago a given date was. Simply provide your ISO date: `showTimeAgo("2024-07-17T17:12:00.000Z")`, and this utility will dynamically update the time with the suffix 'ago'. For example: `now, 2 seconds ago, 2 minutes ago, 1 hour ago, 2 days ago, 1 month ago, 1 year ago`.
 
 ##### List of time suffixes:
-- minutes, hours, days, weeks, months, years 'ago..'
+- now, seconds, minutes, hours, days, weeks, months, years 'ago..'
 
 ##### Default: showTimeago updates on page reload
  _dynamically update time without page reload? code examples shown below_
