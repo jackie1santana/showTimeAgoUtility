@@ -1,6 +1,6 @@
 {
   "name": "showtimeago",
-  "version": "4.0.8",
+  "version": "4.0.9",
   "description": "ShowTimeAgo is a utility that provides a human-readable format of how long ago a date was with zero configuration.",
   "main": "index.js",
   "scripts": {
@@ -33,5 +33,8 @@
   "devDependencies": {
     "jest": "^28.1.2",
     "nodemon": "^3.1.4"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
