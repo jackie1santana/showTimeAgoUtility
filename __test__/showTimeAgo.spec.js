@@ -34,8 +34,8 @@ test('showTimeAgo Utility should not be NaN', () => {
     expect(showTimeAgo(today)).not.toBeNaN();
 });
 
-test('showTimeAgo Utility should return null for no argument', () => {
-    expect(showTimeAgo()).toBeNull();
+test('showTimeAgo Utility should throw an error for no argument', () => {
+    expect(() => showTimeAgo()).toThrow('Invalid date parameter: dateParam cannot be empty. It must be a valid ISO date string or a Date object.');
 });
 
 test('showTimeAgo Utility type should be a function object', () => {
@@ -96,4 +96,25 @@ test('Test Date for exactly one hour ago', () => {
 test('Test Date for multiple hours ago (less than a day)', () => {
     const hoursAgo = new Date(today.getTime() - 5 * 3600000); // 5 hours ago
     expect(showTimeAgo(hoursAgo)).toContain('hours ago');
+});
+
+// Additional test cases for error handling
+test('Test invalid date string', () => {
+    expect(() => showTimeAgo('invalid-date')).toThrow('Invalid date parameter: dateParam is not a valid ISO date string.');
+});
+
+test('Test null date', () => {
+    expect(() => showTimeAgo(null)).toThrow('Invalid date parameter: dateParam cannot be empty. It must be a valid ISO date string or a Date object.');
+});
+
+test('Test undefined date', () => {
+    expect(() => showTimeAgo(undefined)).toThrow('Invalid date parameter: dateParam cannot be empty. It must be a valid ISO date string or a Date object.');
+});
+
+test('Test array as date parameter', () => {
+    expect(() => showTimeAgo([])).toThrow('Invalid date parameter: dateParam must be a valid ISO date string or a Date object.');
+});
+
+test('Test object as date parameter', () => {
+    expect(() => showTimeAgo({})).toThrow('Invalid date parameter: dateParam must be a valid ISO date string or a Date object.');
 });
