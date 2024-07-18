@@ -34,11 +34,27 @@ function showtimeago(dateParam) {
             return `${month} ${getOrdinalNum(day)}, ${year} at ${hours}:${minutes} ${ampm}`;
         }
 
+        // Validate the date parameter
+        function validateDateParam(dateParam) {
+            if (dateParam === undefined || dateParam === null) {
+                throw new Error("Invalid date parameter: dateParam cannot be empty. It must be a valid ISO date string or a Date object.");
+            }
+            if (typeof dateParam === 'string') {
+                const date = new Date(dateParam);
+                if (isNaN(date.getTime())) {
+                    throw new Error("Invalid date parameter: dateParam is not a valid ISO date string.");
+                }
+                return date;
+            }
+            if (typeof dateParam === 'object' && dateParam instanceof Date) {
+                return dateParam;
+            }
+            throw new Error("Invalid date parameter: dateParam must be a valid ISO date string or a Date object.");
+        }
+
         // Main function to calculate the "time ago" string
         function timeAgo(dateParam) {
-            if (!dateParam) return null;
-
-            const date = typeof dateParam === 'object' ? dateParam : new Date(dateParam);
+            const date = validateDateParam(dateParam);
             const now = new Date();
             const DAY_IN_MS = 86400000; // 24 * 60 * 60 * 1000
             const YEAR_IN_MS = 365.25 * DAY_IN_MS; // Account for leap years
@@ -92,7 +108,6 @@ function showtimeago(dateParam) {
             }
         }
 
-        // console.log(timeAgo(dateParam)) test
         return timeAgo(dateParam);
 
     } catch (error) {
@@ -101,5 +116,4 @@ function showtimeago(dateParam) {
     }
 }
 
-// showtimeago("2022-06-20T13:42:29-05:00")
 module.exports = showtimeago;
