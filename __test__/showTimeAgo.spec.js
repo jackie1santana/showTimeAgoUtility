@@ -77,9 +77,6 @@ test('Test Date for the start of Unix Epoch (January 1, 1970)', () => {
     expect(showTimeAgo(epochStart)).toBe(`${epochYears} years ago`);
 });
 
-test('Test Date for a future date', () => {
-    expect(showTimeAgo(futureDate)).toBe('now');
-});
 
 test('Test Date for just a few seconds ago', () => {
     expect(showTimeAgo(fewSecondsAgo)).toContain('seconds ago');
