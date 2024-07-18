@@ -92,6 +92,7 @@ function showtimeago(dateParam) {
             }
         }
 
+        // console.log(timeAgo(dateParam)) test
         return timeAgo(dateParam);
 
     } catch (error) {
@@ -100,4 +101,5 @@ function showtimeago(dateParam) {
     }
 }
 
+// showtimeago("2022-06-20T13:42:29-05:00")
 module.exports = showtimeago;

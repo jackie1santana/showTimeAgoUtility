@@ -1,9 +1,11 @@
 {
   "name": "showtimeago",
-  "version": "3.3.13",
+  "version": "4.0.0",
   "description": "ShowTimeAgo is a utility that provides a human-readable format of how long ago a date was with zero configuration.",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "dev" : "nodemon index.js",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -29,6 +31,7 @@
   },
   "homepage": "https://github.com/jackie1santana/showTimeAgoUtility#readme",
   "devDependencies": {
-    "jest": "^28.1.2"
+    "jest": "^28.1.2",
+    "nodemon": "^3.1.4"
   }
 }
