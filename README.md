@@ -14,7 +14,7 @@ alt="NPM Version"></a> <a href="https://github.com/jackie1santana/showTimeAgoUti
 - Works with Node.js and browsers
 - MIT licensed
 
-###### This an Open Source utility project. I welcome any & all contributions via the development branch only.
+###### This an Open Source utility project.
 ---
 
 ### What is Show Time Ago?
